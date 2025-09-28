@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { FaClock } from "react-icons/fa6";
+import { store } from "../storage/store";
 export default function TimeProvider({ children }: { children: React.ReactNode }) {
 
     const [isNowBD, setIsNowBD] = useState<0 | 1 | 2>(0);
     const [daysLeft, setDaysLeft] = useState(0);
 
     useEffect(() => {
-        const targetDateStart = new Date('2025-10-18 00:00:00');
-        const targetDateEnd = new Date('2025-10-18 23:59:59');
+        const targetDateStart = new Date(`${store.targetDate} 00:00:00`);
+        const targetDateEnd = new Date(`${store.targetDate} 23:59:59`);
 
         const interval = setInterval(() => {
             if (Date.now() > targetDateStart.getTime() && Date.now() < targetDateEnd.getTime()) {
@@ -27,9 +28,9 @@ export default function TimeProvider({ children }: { children: React.ReactNode }
     switch(isNowBD) {
         case 0:
             whatRender = <div className="action-card">
-                <p>А что такое? А что случилось? </p>
-                <p>Нашла какую-то ссылку, а она не работает? Обидно, обидно... </p>
-                <h3>Ничего, осталось подождать <b>{daysLeft} {daysLeft.toString().endsWith('1') ? 'день' : daysLeft.toString().endsWith('2') ? 'дня' : 'дней'}</b>.</h3>
+                <p style={{marginBottom: '1rem'}}>А что такое?... А что случилось?... </p>
+                <p style={{marginBottom: '1rem'}}>Нашла какую-то ссылку, а она не работает? Обидно, обидно... </p>
+                <h3>Ничего, осталось подождать всего <b>{daysLeft} {daysLeft.toString().endsWith('1') ? 'день' : daysLeft.toString().endsWith('2') ? 'дня' : 'дней'}</b>.</h3>
                 <div style={{marginTop: '4rem'}}>
                     <FaClock size={60} />
                 </div>
@@ -39,9 +40,7 @@ export default function TimeProvider({ children }: { children: React.ReactNode }
             whatRender = children;
             break;
         case 2:
-            whatRender = <div className="action-card">
-                День рождения уже прошел Надеюсь, ты сохарнила подарки!
-            </div>;
+            whatRender = children;
             break;
     }
 

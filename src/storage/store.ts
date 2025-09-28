@@ -1,5 +1,6 @@
 // eslint-disable-next-line
 export const store: Record<string, any> = {
+  targetDate: "2025-10-18",
   state: {
     currentCard: 0,
     cards: [
@@ -317,6 +318,7 @@ export const store: Record<string, any> = {
         title: `
           В целом это все, я тебе еще дополнительно расскажу и проконсултирую. Esim купим и установим до отлета. Бери купальник, книжки и сумку для пляжа, крем spf и хорошее настроение!)
         `,
+        image: 'emoji.jpg'
       },
     ],
   },
