@@ -19,7 +19,7 @@ export default function TimeProvider({ children }: { children: React.ReactNode }
                 setIsNowBD(2);
             }
 
-            setDaysLeft(Math.floor((targetDateStart.getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
+            setDaysLeft(Math.floor((targetDateStart.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) + 1);
         }, 0);
         return () => clearInterval(interval);
     }, []);
